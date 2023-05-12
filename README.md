@@ -2,6 +2,8 @@
 Spinning Cube orthographically rendered in 2d using Rust and Macroquad!
 - Code formatted for Windows only, feel free to make it more compatible if needed 👍
 
+![](./assets/spinning_cube.gif)
+
 ## Usage
 1. Clone/Fork the repository
 2. Run `cargo run` or `cargo build` to build a debug binary in the `/target/debug` directory
