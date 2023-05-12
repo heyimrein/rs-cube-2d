@@ -1,5 +1,5 @@
 use macroquad::prelude::*;
-use ndarray::{Array1, Array2, arr2, arr1};
+use ndarray::{Array1, arr2, arr1};
 
 
 #[macroquad::main(window_conf)]
