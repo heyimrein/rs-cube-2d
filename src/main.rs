@@ -45,23 +45,30 @@ async fn main() {
         }
     ];
 
-    // Increase this to speed up rotation
-    let angle: f32 = 0.001;
-
     // App loop
     loop {
         clear_background(BLACK);
 
+        let rotation_speed = 0.01;
+
+        let mut angle_x: f32 = 0.;
+        let mut angle_y: f32 = 0.;
+
+        if is_key_down(KeyCode::Down) { angle_x = rotation_speed }
+        if is_key_down(KeyCode::Up) { angle_x = -rotation_speed }
+        if is_key_down(KeyCode::Right) { angle_y = rotation_speed }
+        if is_key_down(KeyCode::Left) { angle_y = -rotation_speed }
+
         // Define rotation matrices
-        let y_rot = arr2(&[
-            [(angle * 2.).cos(), 0., (angle * 2.).sin()],
-            [0., 1., 0.],
-            [-(angle * 2.).sin(), 0., (angle * 2.).cos()]
+        let x_rot = arr2(&[
+            [1., 0., 0.],
+            [0., angle_x.cos(), -angle_x.sin()],
+            [0., angle_x.sin(), angle_x.cos()]
         ]);
-        let z_rot = arr2(&[
-            [(angle * 3.).cos(), -(angle * 3.).sin(), 0.],
-            [(angle * 3.).sin(), (angle * 3.).cos(), 0.],
-            [0., 0., 1.]
+        let y_rot = arr2(&[
+            [(angle_y * 2.).cos(), 0., (angle_y * 2.).sin()],
+            [0., 1., 0.],
+            [-(angle_y * 2.).sin(), 0., (angle_y * 2.).cos()]
         ]);
 
         // Iterate through each vertex twice to handle rotation and rendering
@@ -72,7 +79,7 @@ async fn main() {
             // Matrix Multiplication for rotation
             // math, ew 🤢
             // jk, i love math
-            vertices[i].position = vert.position.dot(&z_rot).dot(&y_rot);
+            vertices[i].position = vert.position.dot(&x_rot).dot(&y_rot);
 
             vert = vertices[i].to_owned();
 
