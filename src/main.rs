@@ -104,10 +104,14 @@ async fn main() {
                 if diffs > 1 { continue }
 
                 draw_line(
-                    vert.position[0] * dist + (config.window_width / 2) as f32,
-                    vert.position[1] * dist + (config.window_height / 2) as f32,
-                    other_vert.position[0] * dist + (config.window_width / 2) as f32,
-                    other_vert.position[1] * dist + (config.window_height / 2) as f32,
+                    (vert.position[0] * ((vert.position[2] + 5.) * 0.25)) * dist
+                        + (config.window_width / 2) as f32,
+                    (vert.position[1] * ((vert.position[2] + 5.) * 0.25)) * dist
+                        + (config.window_height / 2) as f32,
+                    (other_vert.position[0] * ((other_vert.position[2] + 5.) * 0.25)) * dist
+                        + (config.window_width / 2) as f32,
+                    (other_vert.position[1] * ((other_vert.position[2] + 5.) * 0.25)) * dist
+                        + (config.window_height / 2) as f32,
                     1.,
                     WHITE
                 );
@@ -118,8 +122,10 @@ async fn main() {
             let vert = vertices[i].to_owned();
 
             draw_poly(
-                vert.position[0] * dist + (config.window_width / 2) as f32,
-                vert.position[1] * dist + (config.window_height / 2) as f32,
+                (vert.position[0] * ((vert.position[2] + 5.) * 0.25)) * dist
+                    + (config.window_width / 2) as f32,
+                (vert.position[1] * ((vert.position[2] + 5.) * 0.25)) * dist
+                    + (config.window_height / 2) as f32,
                 10,
                 5.,
                 0.,
