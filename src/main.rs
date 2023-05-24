@@ -45,6 +45,8 @@ async fn main() {
         }
     ];
 
+    let mut mouse_pos = mouse_position();
+
     // App loop
     loop {
         clear_background(BLACK);
@@ -53,6 +55,14 @@ async fn main() {
 
         let mut angle_x: f32 = 0.;
         let mut angle_y: f32 = 0.;
+
+        let cur_mouse_pos = mouse_position();
+        if is_mouse_button_down(MouseButton::Left) {
+            let delta = (mouse_pos.0 - cur_mouse_pos.0, cur_mouse_pos.1 - mouse_pos.1);
+            angle_x = delta.1 * rotation_speed * 0.25;
+            angle_y = delta.0 * rotation_speed * 0.25;
+        }
+        mouse_pos = cur_mouse_pos;
 
         if is_key_down(KeyCode::Down) { angle_x = rotation_speed }
         if is_key_down(KeyCode::Up) { angle_x = -rotation_speed }
